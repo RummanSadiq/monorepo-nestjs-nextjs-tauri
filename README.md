@@ -18,7 +18,10 @@ apps/
   api/       → NestJS (TypeScript, SWC)
   desktop/   → Tauri (Rust + TypeScript + Vite)
 packages/
-  eslint-config/ → Shared ESLint configuration
+  typescript-config/ → Shared TypeScript configs (base, nextjs, nestjs, tauri)
+  eslint-config/     → Shared ESLint configs (base, next, nest, tauri)
+  prettier-config/   → Shared Prettier formatting rules
+  shared-types/      → Type-only API envelopes and session shapes
 ```
 
 ## Prerequisites
@@ -63,12 +66,22 @@ pnpm typecheck:api
 pnpm typecheck:desktop
 ```
 
+## Formatting
+
+Prettier is configured at the root via `@repo/prettier-config`.
+
+```sh
+pnpm format         # format all files
+pnpm format:check   # check formatting (CI)
+```
+
 ## Monorepo philosophy
 
 - Apps are isolated — no cross-imports between apps
 - Sharing is intentionally minimal; business logic lives in the API
-- No giant shared package approach
-- Shared packages will be added only when justified
+- Shared packages are limited to configuration and type contracts
+- If code is used by only one app, it stays in that app
+- See `docs/monorepo-boundaries.md` for full rules
 
 ## Branching
 

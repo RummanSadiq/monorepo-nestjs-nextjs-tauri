@@ -1,0 +1,17 @@
+{
+  "name": "@repo/shared-types",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typescript": "^5.7.0"
+  }
+}

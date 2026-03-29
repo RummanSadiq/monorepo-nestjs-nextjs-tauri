@@ -1,7 +1,7 @@
-import { baseConfig, tseslint } from "@repo/eslint-config";
+import { nextConfig, tseslint } from "@repo/eslint-config/next";
 
 export default tseslint.config(
-  ...baseConfig,
+  ...nextConfig,
   {
     files: ["src/**/*.ts", "src/**/*.tsx"],
   },

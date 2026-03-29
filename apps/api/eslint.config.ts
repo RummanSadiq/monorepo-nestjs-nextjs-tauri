@@ -1,7 +1,7 @@
-import { baseConfig, tseslint } from "@repo/eslint-config";
+import { nestConfig, tseslint } from "@repo/eslint-config/nest";
 
 export default tseslint.config(
-  ...baseConfig,
+  ...nestConfig,
   {
     files: ["src/**/*.ts"],
   },

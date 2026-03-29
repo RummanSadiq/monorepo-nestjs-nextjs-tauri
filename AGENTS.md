@@ -16,24 +16,40 @@ This is a Turborepo + pnpm monorepo for a B2B SaaS platform. It contains three i
 
 5. **Use app-specific commands.** The primary workflow is `pnpm dev:web`, `pnpm dev:api`, `pnpm dev:desktop` — not running everything at once.
 
+6. **Do not move business logic into shared packages.** Business logic belongs in the API. Shared packages are for configuration and type contracts only.
+
+7. **Prefer app-local implementation.** If code is used by only one app, keep it inside that app.
+
+8. **Update docs when adding new packages.** Any new shared package must be documented in this file, `README.md`, and `docs/monorepo-boundaries.md`.
+
 ## App details
 
-| App | Framework | Port | Build output |
-|-----|-----------|------|-------------|
-| `apps/web` | Next.js 15 (App Router) | 3000 | `.next/` |
-| `apps/api` | NestJS 11 (SWC) | 3001 | `dist/` |
-| `apps/desktop` | Tauri 2.x + Vite | 5173 (Vite) | native binary |
+| App            | Framework               | Port        | Build output  |
+| -------------- | ----------------------- | ----------- | ------------- |
+| `apps/web`     | Next.js 15 (App Router) | 3000        | `.next/`      |
+| `apps/api`     | NestJS 11 (SWC)         | 3001        | `dist/`       |
+| `apps/desktop` | Tauri 2.x + Vite        | 5173 (Vite) | native binary |
 
 ## Shared packages
 
-| Package | Purpose |
-|---------|---------|
-| `packages/eslint-config` | Shared ESLint base config (typescript-eslint recommended rules) |
+| Package                   | Purpose                                                             |
+| ------------------------- | ------------------------------------------------------------------- |
+| `@repo/typescript-config` | Shared TypeScript base + framework-specific configs                 |
+| `@repo/eslint-config`     | Shared ESLint base + framework-specific configs (next, nest, tauri) |
+| `@repo/prettier-config`   | Shared Prettier formatting rules                                    |
+| `@repo/shared-types`      | Type-only API envelopes, session shapes, and shared DTOs            |
 
-ESLint config is the only shared package. Apps import `baseConfig` from `@repo/eslint-config` in their `eslint.config.ts`. Each app still owns its file scoping and ignores.
+### Package rules
+
+- All apps extend `@repo/typescript-config` via their `tsconfig.json`
+- All apps use framework-specific ESLint configs (`@repo/eslint-config/next`, `/nest`, `/tauri`)
+- Prettier runs from root via `pnpm format` — no per-app prettier configs
+- `@repo/shared-types` is type-only with zero runtime dependencies — no build step
+- New shared packages require strong justification in the PR description
+- See `docs/monorepo-boundaries.md` for full boundary rules
 
 ## Turborepo
 
-Root scripts use `turbo run <task> --filter=<app>`. Tasks defined in `turbo.json`: `dev`, `build`, `lint`, `typecheck`, `clean`.
+Root scripts use `turbo run <task> --filter=<app>`. Tasks defined in `turbo.json`: `dev`, `build`, `lint`, `typecheck`, `format:check`, `clean`.
 
 Note: Desktop builds (`tauri build`) disable turbo caching via `apps/desktop/turbo.json` because Rust compilation is platform-specific and not safely cacheable by turbo.

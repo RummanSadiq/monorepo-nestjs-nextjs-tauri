@@ -1,7 +1,7 @@
-import { baseConfig, tseslint } from "@repo/eslint-config";
+import { tauriConfig, tseslint } from "@repo/eslint-config/tauri";
 
 export default tseslint.config(
-  ...baseConfig,
+  ...tauriConfig,
   {
     files: ["src/**/*.ts"],
   },

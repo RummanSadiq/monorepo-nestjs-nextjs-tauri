@@ -5,6 +5,7 @@
   "engines": {
     "node": ">=20"
   },
+  "prettier": "@repo/prettier-config",
   "scripts": {
     "dev:web": "turbo run dev --filter=web",
     "dev:api": "turbo run dev --filter=api",
@@ -21,9 +22,13 @@
     "build": "turbo run build",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",
-    "clean": "turbo run clean"
+    "clean": "turbo run clean",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
+    "@repo/prettier-config": "workspace:*",
+    "prettier": "^3.5.0",
     "turbo": "^2.4.0"
   }
 }
