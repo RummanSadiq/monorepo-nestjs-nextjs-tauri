@@ -1,0 +1,25 @@
+{
+  "name": "desktop",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "vite:dev": "vite",
+    "vite:build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"src/**/*.ts\"",
+    "clean": "rm -rf dist .turbo src-tauri/target"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.5.0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@tauri-apps/cli": "^2.5.0",
+    "eslint": "^9.0.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.3.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "monorepo",
+  "private": true,
+  "packageManager": "pnpm@10.32.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev:web": "turbo run dev --filter=web",
+    "dev:api": "turbo run dev --filter=api",
+    "dev:desktop": "turbo run dev --filter=desktop",
+    "build:web": "turbo run build --filter=web",
+    "build:api": "turbo run build --filter=api",
+    "build:desktop": "turbo run build --filter=desktop",
+    "lint:web": "turbo run lint --filter=web",
+    "lint:api": "turbo run lint --filter=api",
+    "lint:desktop": "turbo run lint --filter=desktop",
+    "typecheck:web": "turbo run typecheck --filter=web",
+    "typecheck:api": "turbo run typecheck --filter=api",
+    "typecheck:desktop": "turbo run typecheck --filter=desktop",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.0"
+  }
+}

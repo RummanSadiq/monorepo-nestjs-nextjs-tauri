@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Turborepo
+.turbo/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# NestJS
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# Rust / Tauri
+target/
+gen/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
